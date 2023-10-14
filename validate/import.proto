@@ -1,0 +1,10 @@
+syntax = "proto2";
+package validate;
+
+option go_package = "github.com/protoconf/proto-validate-reflect/validate";
+option java_package = "io.envoyproxy.pgv.validate";
+import "validate/validate.proto";
+
+message FieldOptions {
+    optional FieldRules rules = 1071;
+}
