@@ -26,6 +26,11 @@ func TestValidate(t *testing.T) {
 			args:    args{msg: &cases.FloatConst{Val: 99.99}},
 			wantErr: false,
 		},
+		{
+			name:    "test double",
+			args:    args{msg: &cases.DoubleConst{Val: 99.99}},
+			wantErr: false,
+		},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

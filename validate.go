@@ -24,6 +24,11 @@ func Validate(msg proto.Message) error {
 			if ok, errs := ValidateFloat(v, x.Float); !ok {
 				errors[fd.Name()] = errs
 			}
+		case *validate.FieldRules_Double:
+			if ok, errs := ValidateDouble(v, x.Double); !ok {
+				errors[fd.Name()] = errs
+			}
+
 		}
 		return true
 	})
