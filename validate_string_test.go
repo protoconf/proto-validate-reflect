@@ -1,4 +1,4 @@
-package main
+package proto_validate_reflect
 
 import (
 	"errors"
@@ -17,9 +17,6 @@ func boolPtr(b bool) *bool {
 	return &b
 }
 
-func uint64Ptr(u uint64) *uint64 {
-	return &u
-}
 func TestValidateString(t *testing.T) {
 	type args struct {
 		value protoreflect.Value

@@ -5,8 +5,8 @@ import (
 	"google.golang.org/protobuf/reflect/protoreflect"
 )
 
-func ValidateFloat(value protoreflect.Value, rules *validate.FloatRules) (bool, []error) {
-	f := float32(value.Float())
+func ValidateUInt32(value protoreflect.Value, rules *validate.UInt32Rules) (bool, []error) {
+	f := uint32(value.Uint())
 	var errors []error
 
 	// Check for empty value
@@ -40,17 +40,17 @@ func ValidateFloat(value protoreflect.Value, rules *validate.FloatRules) (bool, 
 	}
 
 	// Membership checks
-	if len(rules.In) > 0 && !floatInSlice(f, rules.In) {
+	if len(rules.In) > 0 && !uint32InSlice(f, rules.In) {
 		errors = append(errors, ErrorIn)
 	}
-	if len(rules.NotIn) > 0 && floatInSlice(f, rules.NotIn) {
+	if len(rules.NotIn) > 0 && uint32InSlice(f, rules.NotIn) {
 		errors = append(errors, ErrorNotIn)
 	}
 
 	return len(errors) == 0, errors
 }
 
-func floatInSlice(s float32, slice []float32) bool {
+func uint32InSlice(s uint32, slice []uint32) bool {
 	for _, v := range slice {
 		if v == s {
 			return true

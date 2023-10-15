@@ -1,4 +1,4 @@
-package main
+package proto_validate_reflect
 
 import (
 	"github.com/protoconf/proto-validate-reflect/validate"
@@ -6,7 +6,7 @@ import (
 )
 
 func ValidateDouble(value protoreflect.Value, rules *validate.DoubleRules) (bool, []error) {
-	f := float64(value.Float())
+	f := value.Float()
 	var errors []error
 
 	// Check for empty value

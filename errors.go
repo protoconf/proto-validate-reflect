@@ -1,4 +1,4 @@
-package main
+package proto_validate_reflect
 
 import "errors"
 
