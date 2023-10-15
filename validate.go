@@ -8,6 +8,7 @@ import (
 	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/reflect/protoreflect"
 	"google.golang.org/protobuf/types/descriptorpb"
+	"google.golang.org/protobuf/types/dynamicpb"
 )
 
 type ValidateError struct {
@@ -47,7 +48,13 @@ func (v *ValidateError) Err() error {
 }
 
 func Validate(msg proto.Message) (bool, error) {
-	m := msg.ProtoReflect()
+	b, _ := proto.Marshal(msg)
+	dyn := dynamicpb.NewMessage(msg.ProtoReflect().Descriptor())
+	proto.Unmarshal(b, dyn)
+	return ValidateDynamic(dyn)
+}
+
+func ValidateDynamic(m *dynamicpb.Message) (bool, error) {
 	errors := &ValidateError{
 		name:   m.Descriptor().FullName().Name(),
 		errors: map[protoreflect.Name][]error{},
