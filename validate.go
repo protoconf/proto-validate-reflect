@@ -100,7 +100,7 @@ func ValidateDynamic(m *dynamicpb.Message) (bool, error) {
 func fieldDescriptorToRules(fd protoreflect.FieldDescriptor) *validate.FieldRules {
 	ext := fd.Options().(*descriptorpb.FieldOptions)
 	b, _ := proto.Marshal(ext)
-	opts := &validate.FieldOptions{}
-	proto.Unmarshal(b, opts)
+	opts := &validate.FieldOptions{Rules: &validate.FieldRules{}}
+	proto.UnmarshalOptions{Merge: true}.Unmarshal(b, opts)
 	return opts.Rules
 }
